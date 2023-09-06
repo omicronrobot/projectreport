@@ -1,0 +1,189 @@
+\documentclass[12pt,fleqn]{article}
+\usepackage{a4}
+\usepackage{graphicx}
+\graphicspath{ {./Figures/} }
+\usepackage{psfrag}
+\usepackage{amsmath}                     % \boldsymbol{#1}
+\usepackage{amssymb}
+\usepackage{Styles/hangcaption}
+\usepackage{Styles/pstricks}
+\usepackage{Styles/pst-node}
+\usepackage{Styles/fancyheadings}
+\usepackage{tocloft}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage[printonlyused]{acronym}
+\usepackage{epstopdf}
+\usepackage{advdate}
+\usepackage[table, dvipsnames]{xcolor}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{longtable}
+\usepackage{svg}
+\usepackage{datetime}
+\svgsetup{inkscapelatex=false}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,      
+    urlcolor=black,
+    }
+    
+\newcommand{\yesthreeday}{{\AdvanceDate[-4]\today}}
+
+\newdateformat{monthyeardate}{\monthname[\THEMONTH], \THEYEAR}
+\epstopdfDeclareGraphicsRule{.pdf}{png}{.png}{convert #1\OutputFile}
+\DeclareGraphicsExtensions{.svg,.png,.pdf}
+
+%-----Tex width---------------------------------
+\textwidth 16cm
+
+%-----Line spacing-------------------------------
+\renewcommand{\baselinestretch}{1.5}     % 1,1-zeilig
+
+%---------Add dots in TOC-----------------------
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+%------Paragraph indention-------------------------------
+\setlength{\parskip}{1.5ex plus0.5ex minus0.5ex}
+
+%-----Prevent indent----------------------
+\setlength{\parindent}{0em}
+
+%-----Richtiger Abstand fur Einheiten-------------
+\def\Unit{\hspace{0.25em}}
+
+%-----Definition of the header--------------------
+\pagestyle{fancyplain}
+\renewcommand{\sectionmark}[1]{\markboth{Chapter~\thesection.~#1}{#1}}
+\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
+\rhead[\fancyplain{}{\leftmark}]%
+{\fancyplain{\thepage}{\thepage}} \cfoot{} \plainheadrulewidth
+0.4pt
+\makeatletter
+\ifcase \@ptsize \relax % 10pt
+  \addtolength{\headheight}{1\p@}
+\or % 11pt
+  \addtolength{\headheight}{2\p@}
+\or % 12pt
+  \addtolength{\headheight}{3\p@}
+\fi \makeatother
+
+%-----Equations / Figures / Tables numbering according to \ sections
+\makeatletter
+\renewcommand\theequation{\thesection.\arabic{equation}}
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\renewcommand\thetable{\thesection.\arabic{table}}
+\@addtoreset{equation}{section} \@addtoreset{figure}{section}
+\@addtoreset{table}{section} \makeatother
+
+%-----Useful abbreviations----------------------
+\newcommand{\mr}{\mathrm}
+\newcommand{\bs}[1]{\mbox{$\boldsymbol{#1}$}}
+\newcommand{\degree}[1]{\mbox{$#1^\circ$}}
+
+%\renewcommand{\figurename}{Bild}
+
+%------Bibliography style-----------------------
+\bibliographystyle{IEEEtran}
+
+%-----Aufzaehlunstiefe im Literaturverzeichnis---------------
+\setcounter{tocdepth}{3}
+
+\begin{document}
+\pagenumbering{Roman}
+\begin{titlepage}
+  \begin{center}
+      \vspace*{-4.0cm}
+    \begin{figure}[!h]
+\centering
+\includegraphics[width=0.3\linewidth]{Figures/JKUAT_logo}
+%\caption{}
+\label{fig:jomologo}
+\end{figure}
+   \large{Jomo Kenyatta University of Agriculture and Technology}\\
+    \large{College of Engineering and Technology}\\
+    \large{School of Mechanical, Materials, and Manufacturing Engineering}\\
+   \large{Department of Mechatronic Engineering}\\
+    ------------------------------------------------------------------------------------------------\\
+    \LARGE{\textbf{Design and Fabrication of a Prototype Mobile Platform with Holonomic and Omnidirectional Motion}}\\[0.5cm]
+    \LARGE{\textbf{FYP-18-7}}\\[0.1cm]
+    \LARGE{\textbf {Final Year Project Report}}\\[0.1cm]
+    \vspace{0.2cm}
+    \large{\textbf{Gitu Kelvin Karimi (ENM221-0058/2017)}}\\
+    \large{\textbf{Osodo Rodney David (ENM221-0091/2017)}}\\[0.3cm]
+    \large{\textbf{Supervisor}}\\
+    \large{Eng. Macben M. Makenzi}\\[0.2cm]
+    % \vfill
+    \large{\small{\monthyeardate\today}}\\
+    \large{\small{Submitted in partial fulfilment of the requirements for the degree of Bachelor of Science in Mechatronic Engineering in Jomo Kenyatta University of Agriculture and Technology, 2022}}
+    ------------------------------------------------------------------------------------------------\\[1.0cm]
+  \end{center}
+\end{titlepage}
+%
+%\pagenumbering{gobble}% Remove page numbers (and reset to 1)
+\lhead{Declaration}
+\input{Files/Declaration}
+\clearpage
+\newpage
+\lhead{Acknowledgement}
+\input{Files/Acknowledgment}
+\clearpage
+\newpage
+\lhead{Abstract}
+\input{Files/Abstract}
+\clearpage
+\lhead{Contents}
+\tableofcontents
+\clearpage
+\addcontentsline{toc}{section}{Table of Contents}
+\lhead{List of Figures}
+\addcontentsline{toc}{section}{List of Figures}
+\let\oldnumberline\numberline%
+\renewcommand{\numberline}{\figurename~\oldnumberline}%
+\listoffigures
+\clearpage
+\lhead{List of Tables}
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\newpage
+\clearpage
+\lhead{Nomenclature}
+\addcontentsline{toc}{section}{Nomenclature}
+\input{Files/ListofAbbreviations}
+\clearpage
+\newpage
+
+\pagenumbering{arabic}
+  \lhead{Chapter 1. Introduction}
+  \input{Files/Introduction}
+  \clearpage
+  \lhead{Chapter 2. Literature Review}
+  \input{Files/Chapter2}
+  \clearpage
+  \lhead{Chapter 3. Methodology}
+    \input{Files/Chapter3}
+  \clearpage
+  \lhead{Chapter 4. Results and Discussion}
+    \input{Files/Chapter4}
+  \clearpage
+   \lhead{Chapter 5. Conclusion}
+    \input{Files/Chapter5}
+%  \input{Files/Summary}
+  \clearpage
+%----  Bibliography  ----------------------------------------
+\lhead{REFERENCES}
+\markright{References}
+
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{Bib/IEEEtran}
+\bibliography{Bib/References}
+  \clearpage
+ 
+ \lhead{APPENDICES}
+\markright{APPENDICES}                                
+\addcontentsline{toc}{section}{Appendices}                      
+\input{Files/Appendices}
+% \appendix
+\end{document}
